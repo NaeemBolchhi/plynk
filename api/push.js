@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        return res.status(200).json({ success: true, slug: slug, request: JSON.stringify(req) });
+        return res.status(200).json({ success: true, request: JSON.stringify(req) });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error.' });
