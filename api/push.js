@@ -1,16 +1,16 @@
 // Import simply crypto js library
-import SimpleCrypto from "../lib/scrypto.min.js"
+// import SimpleCrypto from "../lib/scrypto.min.js"
 
-const scrypto = {
-    encode: function (key, string) {
-        const sc = new SimpleCrypto(key);
-        return sc.encrypt(string);
-    },
-    decode: function (key, string) {
-        const sc = new SimpleCrypto(key);
-        return sc.decrypt(string);
-    }
-};
+// const scrypto = {
+//     encode: function (key, string) {
+//         const sc = new SimpleCrypto(key);
+//         return sc.encrypt(string);
+//     },
+//     decode: function (key, string) {
+//         const sc = new SimpleCrypto(key);
+//         return sc.decrypt(string);
+//     }
+// };
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
