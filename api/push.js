@@ -1,16 +1,16 @@
-// Import simply crypto js library
-import SimpleCrypto from "simple-crypto-js"
+import { createCipheriv, scryptSync, randomBytes } from 'crypto';
 
-const scrypto = {
-    encode: function (key, string) {
-        const sc = new SimpleCrypto(key);
-        return sc.encrypt(string);
-    },
-    decode: function (key, string) {
-        const sc = new SimpleCrypto(key);
-        return sc.decrypt(string);
-    }
-};
+function encrypt(text, password, salt) {
+    const key = scryptSync(password, salt, 32);
+    const iv = randomBytes(16);
+    
+    const cipher = createCipheriv('aes-256-gcm', key, iv);
+    const encrypted = Buffer.concat([cipher.update(text, 'utf8'), cipher.final()]);
+    const tag = cipher.getAuthTag();
+
+    // Return as a single base64 string: IV + Tag + Encrypted Data
+    return Buffer.concat([iv, tag, encrypted]).toString('base64');
+}
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,14 +25,17 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed.' });
     }
 
-    const { PUSH_TOKENS } = process.env;
+    const { PUSH_TOKENS, SALT_STRING } = process.env;
 
-    if (!PUSH_TOKENS) {
+    if (!PUSH_TOKENS || !SALT_STRING) {
         return res.status(500).json({ error: 'Server not configured.' });
     }
 
     try {
-        return res.status(200).json({ success: true });
+        const long_url = req.body.long_url;
+        const user_key = req.body.user_key || SALT_STRING;
+
+        return res.status(200).json({ success: true, encrypted: encrypt(long_url, 'asd', user_key) });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error.' });
