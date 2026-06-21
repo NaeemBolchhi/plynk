@@ -1,0 +1,8 @@
+{
+  "name": "plynk",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "simple-crypto-js": "^3.0.1"
+  }
+}
