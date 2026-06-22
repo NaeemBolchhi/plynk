@@ -55,6 +55,7 @@ async function createPaste(dev_key, paste_content, expiration) {
 
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Origin', 'https://plynk.vercel.app');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -77,10 +78,11 @@ export default async function handler(req, res) {
     try {
         const long_url = req.body.long_url;
         const user_key = req.body.user_key || SALT_STRING;
+        const expiration = req.body.expiration || '1D';
 
         const encrypted_url = encrypt(long_url, PASS_STRING, user_key);
 
-        const pasteResponse = await createPaste(PUSH_TOKENS_ARR[0], encrypted_url, '10M');
+        const pasteResponse = await createPaste(PUSH_TOKENS_ARR[0], encrypted_url, expiration);
 
         if (pasteResponse.match(/pastebin\.com/)) {
             return res.status(200).json({ success: true, response: pasteResponse.replace(/.*\/(.*)$/,'$1') });

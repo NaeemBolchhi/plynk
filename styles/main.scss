@@ -1,0 +1,293 @@
+$tn: 400px;
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+$xxl: 1536px;
+
+$globalduration: .2s;
+$hoverduration: .1s;
+$globalradius: .8rem;
+$buttonheight: 4.8rem;
+$gapheight: 12.8rem;
+$buttonfontsize: 1.45rem;
+$globalsidepadding: 0 3.2rem;
+
+@mixin sameSize($size) {
+    height: $size;
+    width: $size;
+}
+
+@mixin fontSize($fSize, $mWidth) {
+    @media screen and (max-width: ($mWidth - 0.02px)) {
+        font-size: $fSize;
+    }
+}
+
+@mixin showSelection($val) {
+    &[data-selected="#{$val}"] {
+        > div > span[data-value="#{$val}"] {
+            color: var(--bg-deep);
+            background: var(--accent-color);
+        }
+    }
+}
+
+@mixin transition() {
+    transition-duration: var(--hover-duration);
+    transition-timing-function: ease-in-out;
+}
+
+@mixin borderBox() {
+    box-sizing: border-box;
+}
+
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color: var(--accent-color) #00000000 !important;
+    outline: none;
+    -webkit-tap-highlight-color: transparent !important;
+    &::-webkit-scrollbar {
+        width: 7px !important;
+        height: 7px !important;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--accent-color) !important;
+    }
+    &::-webkit-scrollbar-track {
+        background: #00000000 !important;
+    }
+    &, &::before, &::after {
+        @include transition();
+        @include borderBox();
+    }
+}
+
+::selection {
+    color: var(--bg-lite);
+    background: var(--accent-color);
+}
+
+button, h1 {
+    all: unset;
+}
+
+a {
+    &, &:visited {
+        color: var(--text-color-darker);
+        text-decoration: none;
+    }
+    &:hover {
+        color: var(--text-color);
+    }
+}
+
+html {
+    --global-duration: #{$globalduration};
+    --hover-duration: #{$hoverduration};
+    --mono: 'JetBrains Mono', monospace;
+    font-size: 62.5%;//10px;
+    @include fontSize(56.25%, $md);//9px
+    @include fontSize(53.125%, $sm);//8.5px
+    @include fontSize(calc(100svw / 50), $tn);
+    &, body {
+        @include sameSize(100%);
+    }
+    body {
+        font-size: 1.6rem;
+        font-family: var(--mono);
+        margin: 0;
+        padding: 0;
+        background: var(--bg-deep);
+        color: var(--text-color);
+        &.noduration {
+            --global-duration: 0s;
+            --hover-duration: 0s;
+        }
+    }
+}
+
+body > .content {
+    @include sameSize(100%);
+    background: var(--bg-deep);
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > form {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 6rem);
+        max-width: $sm;
+        .logo {
+            font-size: 4rem;
+            margin-bottom: .8rem;
+            > span:first-of-type {
+                font-weight: 700;
+                color: var(--accent-color);
+                &::selection {
+                    color: var(--bg-deep);
+                }
+            }
+            > span:last-of-type {
+                font-weight: 300;
+                font-size: 3rem;
+                color: var(--text-color-darker);
+            }
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-color-darker);
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+        .shorten {
+            --_padding: 1.4rem;
+            --_height: 4.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid transparent;
+            width: calc(100% + 2px);
+            transform: translateX(-1px);
+            > span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--bg-lite);
+                padding: 0 var(--_padding);
+                height: var(--_height);
+                color: var(--accent-color);
+                border: 1px solid var(--border-color);
+                border-right: 0;
+                position: relative;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    height: 100%;
+                    width: 1px;
+                    background: var(--border-color);
+                    right: -1px;
+                }
+            }
+            > input[type="text"] {
+                font-family: inherit;
+                font-size: inherit;
+                color: var(--text-color);
+                background: var(--bg-lite);
+                padding: 0 var(--_padding);
+                height: var(--_height);
+                border: 0;
+                width: 1px;
+                flex: 1 0 auto;
+                border: 1px solid var(--border-color);
+                border-left: 0;
+                border-right: 0;
+            }
+            > button {
+                padding: 0 var(--_padding);
+                height: var(--_height);
+                color: var(--bg-deep);
+                background: var(--accent-color);
+                font-size: 1.248rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                cursor: pointer;
+                &[type="qr"] {
+                    background: var(--accent-lite);
+                }
+                &[type="copy"] {
+                    background: var(--accent-deep);
+                }
+            }
+            &, > span, > input[type="text"] {
+                transition-duration: var(--global-duration);
+                transition-timing-function: ease-in-out;
+            }
+            &:has(input[type="text"]:focus-within) {
+                &, > span, > input[type="text"] {
+                    border-color: var(--accent-color);
+                }
+            }
+        }
+        .expires {
+            --_height: 3rem;
+            --_padding: .75rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            color: var(--text-color-darker);
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: var(--_height);
+            }
+            > span {
+                padding: 0 var(--_padding) 0 0;
+            }
+            > div {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                width: 100%;
+                border-right: 1px solid var(--border-color);
+                > span {
+                    border: 1px solid var(--border-color);
+                    border-right: 0;
+                    padding: 0 var(--_padding);
+                    cursor: pointer;
+                    &:hover {
+                        background: var(--bg-lite);
+                        color: var(--text-color);
+                    }
+                    position: relative;
+                }
+            }
+            @include showSelection(10M);
+            @include showSelection(1H);
+            @include showSelection(1D);
+            @include showSelection(1W);
+            @include showSelection(2W);
+            @include showSelection(1M);
+            @include showSelection(6M);
+            @include showSelection(1Y);
+            @include showSelection(N);
+
+            @media screen and (max-width: calc($sm - 0.02px)) {
+                
+            }
+        }
+        .anew {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+    }
+    &:not(.shortened) {
+        .output, .anew {
+            display: none;
+        }
+    }
+    &.shortened {
+        .input, .expires {
+            display: none;
+        }
+    }
+}
+
+footer {
+    margin-top: 10rem;
+    font-size: 1.2rem;
+    color: var(--text-color-darker);
+}

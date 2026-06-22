@@ -23,11 +23,10 @@
    <meta name="theme-color" content="#14100b">
    <meta name="darkreader-lock">
 
-   <!-- <link rel="stylesheet" type="text/css" href="styles/fontasm.min.css"> -->
-   <!-- <link rel="stylesheet" type="text/css" href="styles/fontface.min.css"> -->
-   <!-- <link rel="stylesheet" type="text/css" href="styles/main.css"> -->
-   <!-- <style rel="stylesheet" id="nightCSS"></style> -->
-   <!-- <style rel="stylesheet" id="dayCSS"></style> -->
+   <link rel="stylesheet" type="text/css" href="styles/jetbrainsmono.min.css">
+   <link rel="stylesheet" type="text/css" href="styles/main.css">
+   <style rel="stylesheet" id="nightCSS"></style>
+   <style rel="stylesheet" id="dayCSS"></style>
 
    <meta property="og:site_name" content="Plynk">
    <meta property="og:title" content="Plynk">
@@ -44,14 +43,40 @@
    <meta name="twitter:image" content="https://plynk.vercel.app/app/twitter.png?20260522041716">
    <meta name="twitter:card" content="summary_large_image">
 
-   <!-- <script type="text/javascript" src="lib/scrypto.min.js"></script> -->
    <!-- <script type="text/javascript" src="scripts/head.min.js"></script> -->
-   <!-- <script type="text/javascript" src="scripts/theme.min.js"></script> -->
+   <script type="text/javascript" src="scripts/theme.min.js"></script>
 </head>
-<body class="showmenu noduration">
+<body>
+   <div class="content">
+      <form>
+         <a href="/" class="logo"><span>plynk</span><span>.vercel.app</span></a>
+         <span class="subtitle">A PasteBin-backed URL Shortener</span>
+         <div class="shorten">
+            <span>~$</span>
+            <input type="text" id="pasted_url" placeholder="paste a long url here..." required>
+            <button class="output" type="qr">QR</button>
+            <button class="output" type="copy">COPY</button>
+            <button class="input" type="submit">&#62;__&#60;</button>
+         </div>
+         <div class="expires" data-selected="1D">
+            <span>Expires</span>
+            <div class="expires__options">
+               <span data-value="10M">10 mins</span>
+               <span data-value="1H">1 hour</span>
+               <span data-value="1D">1 day</span>
+               <span data-value="1W">1 week</span>
+               <span data-value="2W">2 weeks</span>
+               <span data-value="1M">1 month</span>
+               <span data-value="6M">6 months</span>
+               <span data-value="1Y">1 year</span>
+               <span data-value="N">never</span>
+            </div>
+         </div>
+         <a class="anew" href="/">Shorten another link</a>
+      </form>
+      <footer><a href="https://github.com/NaeemBolchhi/plynk">GitHub</a> | <a href="https://gitlab.com/NaeemBolchhi/plynk">GitLab</a> | <a href="https://mit-license.org/">MIT License</a></footer>
+   </div>
+
    <script type="text/javascript" src="scripts/body.min.js"></script>
-   <!-- <script type="text/javascript" src="/scripts/body/default.min.js"></script>
-   <script type="text/javascript" src="/scripts/body/input.min.js"></script>
-   <script type="text/javascript" src="/scripts/body/menu.min.js"></script> -->
 </body>
 </html>
