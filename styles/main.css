@@ -35,7 +35,7 @@ button, h1 {
 }
 
 a, a:visited {
-  color: var(--text-color-darker);
+  color: var(--text-color-h);
   text-decoration: none;
 }
 a:hover {
@@ -118,12 +118,12 @@ body > .content > form .logo > span:first-of-type::selection {
 body > .content > form .logo > span:last-of-type {
   font-weight: 300;
   font-size: 3rem;
-  color: var(--text-color-darker);
+  color: var(--text-color-h);
 }
 body > .content > form .subtitle {
   font-size: 1.2rem;
   font-weight: 300;
-  color: var(--text-color-darker);
+  color: var(--text-color-h);
   text-transform: uppercase;
   margin-bottom: 4rem;
 }
@@ -182,6 +182,8 @@ body > .content > form .shorten > button[type=submit], body > .content > form .s
   font-weight: 600;
   text-transform: uppercase;
   cursor: pointer;
+  transition-duration: var(--hover-duration);
+  transition-timing-function: ease-in-out;
 }
 body > .content > form .shorten span {
   display: flex;
@@ -195,7 +197,7 @@ body > .content > form .shorten span[type=copy] {
   background: var(--accent-deep);
 }
 body > .content > form .shorten, body > .content > form .shorten > span, body > .content > form .shorten > input[type=text] {
-  transition-duration: var(--global-duration);
+  transition-duration: var(--hover-duration);
   transition-timing-function: ease-in-out;
 }
 body > .content > form .shorten:has(input[type=text]:not([readonly]):focus-within), body > .content > form .shorten:has(input[type=text]:not([readonly]):focus-within) > span, body > .content > form .shorten:has(input[type=text]:not([readonly]):focus-within) > input[type=text] {
@@ -207,7 +209,7 @@ body > .content > form .expires {
   display: flex;
   align-items: center;
   font-size: 1.2rem;
-  color: var(--text-color-darker);
+  color: var(--text-color-h);
 }
 body > .content > form .expires span {
   display: flex;
@@ -309,7 +311,7 @@ body > .content.shortened .input, body > .content.shortened .expires {
 footer {
   margin-top: 20rem;
   font-size: 1.2rem;
-  color: var(--text-color-darker);
+  color: var(--text-color-h);
 }
 
 body > .qr {

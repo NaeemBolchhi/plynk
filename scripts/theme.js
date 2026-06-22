@@ -7,14 +7,13 @@ function reShade(color, amount) {
 
 const darkTheme = `
     html, html[data-theme="default"] {
-        --accent-color: #6de24d;
-        --accent-lite: #f9f048;
-        --accent-deep: #0fd851;
+        --accent-color: #68dd48;
+        --accent-lite: #f4eb43;
+        --accent-deep: #0ad34c;
         --text-color: #c8c8c8;
-        --text-color-darker: ${reShade('#c8c8c8', -80)};
+        --text-color-h: ${reShade('#c8c8c8', -80)};
         --bg-deep: #0d0d0d;
         --bg-lite: ${reShade('#0d0d0d', 9)};
-        --bg-lite-h: ${reShade('#0d0d0d', 13)};
         --border-color: ${reShade('#0d0d0d', 18)};
         --shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
@@ -22,13 +21,15 @@ const darkTheme = `
 
 const lightTheme = `
     html, html[data-theme="default"] {
-        --accent-color: #ec9918;
-        --accent-lite: #f2d230;
-        --accent-deep: #e56000;
-        --text-color: #080a0c;
-        --bg-deep: #ffffff;
-        --bg-mid: #f9f9f9;
-        --bg-lite: #f2f2f3;
+        --accent-color: #68dd48;
+        --accent-lite: #f4eb43;
+        --accent-deep: #0ad34c;
+        --text-color: #2b2b2b;
+        --text-color-h: ${reShade('#2d2d2d', 50)};
+        --bg-deep: #f6f6f6;
+        --bg-lite: ${reShade('#f6f6f6', -9)};
+        --border-color: ${reShade('#f6f6f6', -23)};
+        --shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
 `;
 

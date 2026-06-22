@@ -74,7 +74,7 @@ button, h1 {
 
 a {
     &, &:visited {
-        color: var(--text-color-darker);
+        color: var(--text-color-h);
         text-decoration: none;
     }
     &:hover {
@@ -139,13 +139,13 @@ body > .content {
             > span:last-of-type {
                 font-weight: 300;
                 font-size: 3rem;
-                color: var(--text-color-darker);
+                color: var(--text-color-h);
             }
         }
         .subtitle {
             font-size: 1.2rem;
             font-weight: 300;
-            color: var(--text-color-darker);
+            color: var(--text-color-h);
             text-transform: uppercase;
             margin-bottom: 4rem;
         }
@@ -203,6 +203,7 @@ body > .content {
                 font-weight: 600;
                 text-transform: uppercase;
                 cursor: pointer;
+                @include transition();
             }
             span {
                 display: flex;
@@ -216,8 +217,7 @@ body > .content {
                 }
             }
             &, > span, > input[type="text"] {
-                transition-duration: var(--global-duration);
-                transition-timing-function: ease-in-out;
+                @include transition();
             }
             &:has(input[type="text"]:not([readonly]):focus-within) {
                 &, > span, > input[type="text"] {
@@ -231,7 +231,7 @@ body > .content {
             display: flex;
             align-items: center;
             font-size: 1.2rem;
-            color: var(--text-color-darker);
+            color: var(--text-color-h);
             span {
                 display: flex;
                 align-items: center;
@@ -313,7 +313,7 @@ body > .content {
 footer {
     margin-top: 20rem;
     font-size: 1.2rem;
-    color: var(--text-color-darker);
+    color: var(--text-color-h);
 }
 
 body > .qr {

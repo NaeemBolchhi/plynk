@@ -18,19 +18,21 @@ document.addEventListener('click', async (e) => {
     }
 
     if (e.target.closest('form span[type="copy"]')) {
-        try {
-            if (!navigator.clipboard) {
-                throw new Error("Clipboard API not supported");
+        if (pasted_url.value === pasted_url.getAttribute('data-value')) {
+            try {
+                if (!navigator.clipboard) {
+                    throw new Error("Clipboard API not supported");
+                }
+                await navigator.clipboard.writeText(pasted_url.getAttribute('data-value'));
+                pasted_url.value = 'copied url to clipboard';
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                pasted_url.value = 'failed to copy url to clipboard';
             }
-            await navigator.clipboard.writeText(pasted_url.getAttribute('data-value'));
-            pasted_url.value = 'copied url to clipboard';
-        } catch (err) {
-            console.error('Failed to copy: ', err);
-            pasted_url.value = 'failed to copy url to clipboard';
+    
+            setTimeout(() => {
+                pasted_url.value = pasted_url.getAttribute('data-value');
+            }, 850);
         }
-
-        setTimeout(() => {
-            pasted_url.value = pasted_url.getAttribute('data-value');
-        }, 850);
     }
 });
