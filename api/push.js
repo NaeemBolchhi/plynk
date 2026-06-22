@@ -72,16 +72,18 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Server not configured.' });
     }
 
+    const PUSH_TOKENS_ARR = JSON.parse(PUSH_TOKENS);
+
     try {
         const long_url = req.body.long_url;
         const user_key = req.body.user_key || SALT_STRING;
 
         const encrypted_url = encrypt(long_url, PASS_STRING, user_key);
 
-        // createPaste(PUSH_TOKENS[0], encrypted_url, '10M').then((res) => {
-        //     return res.status(200).json({ success: true, response: res });
-        // });
-        return res.status(200).json({ success: true, response: PUSH_TOKENS[0] });
+        createPaste(PUSH_TOKENS_ARR[0], encrypted_url, '10M').then((res) => {
+            return res.status(200).json({ success: true, response: res });
+        });
+        // return res.status(200).json({ success: true, response: PUSH_TOKENS[0] });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error.' });
