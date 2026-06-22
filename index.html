@@ -46,6 +46,13 @@
    <script type="text/javascript" src="scripts/theme.min.js"></script>
 </head>
 <body>
+   <div class="qr">
+      <span>
+         <qr-code contents="https://plynk.vercel.app" style="height: 300px;width: 300px">
+            <img src="app/icon.svg" slot="icon" />
+         </qr-code>
+      </span>
+   </div>
    <div class="content">
       <form>
          <a href="/" class="logo"><span>plynk</span><span>.vercel.app</span></a>
@@ -53,8 +60,8 @@
          <div class="shorten">
             <span>~$</span>
             <input type="text" id="pasted_url" placeholder="paste a long url here..." required>
-            <button class="output" type="qr">QR</button>
-            <button class="output" type="copy">COPY</button>
+            <span class="output" type="qr">QR</span>
+            <span class="output" type="copy">COPY</span>
             <button class="input" type="submit">&#62;__&#60;</button>
          </div>
          <div class="expires" data-selected="1D">
@@ -76,6 +83,7 @@
       <footer><a href="https://github.com/NaeemBolchhi/plynk">GitHub</a> | <a href="https://gitlab.com/NaeemBolchhi/plynk">GitLab</a> | <a href="https://mit-license.org/">MIT License</a></footer>
    </div>
 
+   <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
    <script type="text/javascript" src="scripts/body.min.js"></script>
 </body>
 </html>

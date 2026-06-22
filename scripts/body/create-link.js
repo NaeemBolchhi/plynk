@@ -1,6 +1,10 @@
 document.querySelector('.content > form').addEventListener('submit', (e) => {
     e.preventDefault();
 
+    if (document.querySelector('body > .content').classList.contains('shortened')) {
+        return;
+    }
+
     async function main() {
         try {
             const response = await fetch(`${window.location.origin}/api/push`, {
@@ -27,6 +31,8 @@ document.querySelector('.content > form').addEventListener('submit', (e) => {
 
             document.querySelector('.content').classList.add('shortened');
             document.querySelector('#pasted_url').value = `${window.location.origin}/${result.response}`;
+            document.querySelector('#pasted_url').setAttribute('data-value', `${window.location.origin}/${result.response}`);
+            document.querySelector('#pasted_url').setAttribute('readonly','');
         } catch (error) {
             console.error('Fetch Error:', error.message);
         }

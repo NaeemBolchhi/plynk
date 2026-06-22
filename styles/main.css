@@ -97,10 +97,13 @@ body > .content > form {
   flex-direction: column;
   width: calc(100% - 6rem);
   max-width: 640px;
+  margin-top: 10rem;
 }
 body > .content > form .logo {
   font-size: 4rem;
   margin-bottom: 0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 body > .content > form .logo > span:first-of-type {
   font-weight: 700;
@@ -136,7 +139,7 @@ body > .content > form .shorten {
   width: calc(100% + 2px);
   transform: translateX(-1px);
 }
-body > .content > form .shorten > span {
+body > .content > form .shorten > span:first-of-type {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,7 +151,7 @@ body > .content > form .shorten > span {
   border-right: 0;
   position: relative;
 }
-body > .content > form .shorten > span::after {
+body > .content > form .shorten > span:first-of-type::after {
   content: "";
   position: absolute;
   height: 100%;
@@ -170,7 +173,7 @@ body > .content > form .shorten > input[type=text] {
   border-left: 0;
   border-right: 0;
 }
-body > .content > form .shorten > button {
+body > .content > form .shorten > button[type=submit], body > .content > form .shorten span[type=qr], body > .content > form .shorten span[type=copy] {
   padding: 0 var(--_padding);
   height: var(--_height);
   color: var(--bg-deep);
@@ -180,17 +183,22 @@ body > .content > form .shorten > button {
   text-transform: uppercase;
   cursor: pointer;
 }
-body > .content > form .shorten > button[type=qr] {
+body > .content > form .shorten span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body > .content > form .shorten span[type=qr] {
   background: var(--accent-lite);
 }
-body > .content > form .shorten > button[type=copy] {
+body > .content > form .shorten span[type=copy] {
   background: var(--accent-deep);
 }
 body > .content > form .shorten, body > .content > form .shorten > span, body > .content > form .shorten > input[type=text] {
   transition-duration: var(--global-duration);
   transition-timing-function: ease-in-out;
 }
-body > .content > form .shorten:has(input[type=text]:focus-within), body > .content > form .shorten:has(input[type=text]:focus-within) > span, body > .content > form .shorten:has(input[type=text]:focus-within) > input[type=text] {
+body > .content > form .shorten:has(input[type=text]:not([readonly]):focus-within), body > .content > form .shorten:has(input[type=text]:not([readonly]):focus-within) > span, body > .content > form .shorten:has(input[type=text]:not([readonly]):focus-within) > input[type=text] {
   border-color: var(--accent-color);
 }
 body > .content > form .expires {
@@ -277,10 +285,10 @@ body > .content > form .anew {
 }
 body > .content > form .anew.e404 {
   opacity: 0;
-}
-body > .content > form .anew.right {
   margin-left: auto;
   margin-top: 2rem;
+}
+body > .content > form .anew.right {
   opacity: 1 !important;
 }
 body > .content > form .redirected {
@@ -299,7 +307,30 @@ body > .content.shortened .input, body > .content.shortened .expires {
 }
 
 footer {
-  margin-top: 10rem;
+  margin-top: 20rem;
   font-size: 1.2rem;
   color: var(--text-color-darker);
+}
+
+body > .qr {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+body > .qr > span {
+  background-color: white;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+body > .qr > span img {
+  margin: 0.2rem;
+}
+body > .qr:not(.show) {
+  display: none;
 }/*# sourceMappingURL=main.css.map */

@@ -16,9 +16,7 @@ const darkTheme = `
         --bg-lite: ${reShade('#0d0d0d', 9)};
         --bg-lite-h: ${reShade('#0d0d0d', 13)};
         --border-color: ${reShade('#0d0d0d', 18)};
-        --clear-hover: ${reShade('#0d0d0d', 26)};
-        --green: #4fb83a;
-        --red: #dc2626;
+        --shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     }
 `;
 
