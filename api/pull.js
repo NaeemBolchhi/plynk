@@ -16,6 +16,24 @@ function decrypt(encryptedBase64, password, salt) {
     return Buffer.concat([decipher.update(text), decipher.final()]).toString('utf8');
 }
 
+async function getPaste(paste_id) {
+    const url = `https://pastebin.com/raw/${paste_id}`;
+
+    try {
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.statusText}`);
+        }
+
+        const data = await response.text();
+        return data;
+    } catch (error) {
+        console.error('Error retrieving paste:', error);
+        return null;
+    }
+}
+
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -29,19 +47,23 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed.' });
     }
 
-    const { SALT_STRING } = process.env;
+    const { SALT_STRING, PASS_STRING } = process.env;
 
     if (!SALT_STRING) {
         return res.status(500).json({ error: 'Server not configured.' });
     }
 
-    // try {
-    //     const long_url = req.body.long_url;
-    //     const user_key = req.body.user_key || SALT_STRING;
+    try {
+        const slug = req.body.slug;
+        const user_key = req.body.user_key || SALT_STRING;
+        
+        const pasteResponse = await getPaste(slug);
 
-    //     return res.status(200).json({ success: true, encrypted: encrypt(long_url, 'asd', user_key) });
-    // } catch (err) {
-    //     console.error(err);
-    //     return res.status(500).json({ error: 'Internal server error.' });
-    // }
+        const decrypted_url = decrypt(pasteResponse, PASS_STRING, user_key);
+
+        return res.status(200).json({ success: true, response: decrypted_url });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error.' });
+    }
 }

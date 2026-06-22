@@ -28,7 +28,7 @@ async function createPaste(dev_key, paste_content, expiration) {
 
     const params = new URLSearchParams();
     params.append('api_option', 'paste');
-    params.append('api_paste_private', '1'); // Marked as unlisted
+    params.append('api_paste_private', '0'); // Marked as public
     params.append('api_dev_key', dev_key);
     params.append('api_paste_code', paste_content);
 
