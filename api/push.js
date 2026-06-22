@@ -80,10 +80,10 @@ export default async function handler(req, res) {
 
         const encrypted_url = encrypt(long_url, PASS_STRING, user_key);
 
-        createPaste(PUSH_TOKENS_ARR[0], encrypted_url, '10M').then((res) => {
-            return res.status(200).json({ success: true, response: res });
-        });
-        // return res.status(200).json({ success: true, response: PUSH_TOKENS[0] });
+        // createPaste(PUSH_TOKENS_ARR[0], encrypted_url, '10M').then((res) => {
+        //     return res.status(200).json({ success: true, response: res });
+        // });
+        return res.status(200).json({ success: true, response: PUSH_TOKENS_ARR[0] });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error.' });
