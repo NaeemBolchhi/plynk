@@ -23,19 +23,20 @@ function dateVer() {
            date.getSeconds().toString().padStart(2,0);
 }
 
-async function createPaste(dev_key, paste_content, expiration) {
+async function createPaste(keys, paste_content, expiration) {
     const url = 'https://pastebin.com/api/api_post.php';
 
     const params = new URLSearchParams();
     params.append('api_option', 'paste');
     params.append('api_paste_private', '0'); // Marked as public
-    params.append('api_dev_key', dev_key);
+    params.append('api_dev_key', keys.dev_key);
     params.append('api_paste_code', paste_content);
 
     // Optional parameters
     params.append('api_paste_name', dateVer());
     params.append('api_paste_expire_date', expiration);
     params.append('api_paste_format', 'text');
+    params.append('api_user_key', keys.login_key);
 
     try {
         const response = await fetch(url, {
