@@ -1,4 +1,4 @@
-# <img src="app/icon.svg" alt="Plynk Logo" style="width:72px"> Plynk - A PasteBin-backed URL Shortener
+# <img src="app/icon.svg" alt="Plynk Logo" width="72px"> Plynk - A PasteBin-backed URL Shortener
 
 Plynk shortens URLs by encrypting them and storing the ciphertext as a Pastebin paste. The paste ID becomes the short slug. No database required — Pastebin *is* the database.
 
