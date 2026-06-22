@@ -8,11 +8,11 @@ document.querySelector('body > .qr').addEventListener('click', () => {
 });
 
 document.addEventListener('click', async (e) => {
-    if (!e.target.closest('form span[type="qr"]') && !e.target.closest('form button[type="copy"]')) {return;}
+    if (!e.target.closest('form span[type="qr"]') && !e.target.closest('form span[type="copy"]')) {return;}
 
     const pasted_url = document.querySelector('#pasted_url');
 
-    if (e.target.closest('form button[type="qr"]')) {
+    if (e.target.closest('form span[type="qr"]')) {
         document.querySelector('body > .qr').classList.add('show');
         document.querySelector('.qr qr-code').setAttribute('contents', pasted_url.getAttribute('data-value'));
     }
