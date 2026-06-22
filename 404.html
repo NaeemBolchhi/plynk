@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <script type="text/javascript" src="scripts/head.min.js"></script>
+
    <title>Plynk</title>
    <meta http-equiv="content-type" content="text/html; charset=utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -50,28 +52,8 @@
       <form>
          <a href="/" class="logo"><span>plynk</span><span>.vercel.app</span></a>
          <span class="subtitle">A PasteBin-backed URL Shortener</span>
-         <div class="shorten">
-            <span>~$</span>
-            <input type="text" id="pasted_url" placeholder="paste a long url here..." required>
-            <button class="output" type="qr">QR</button>
-            <button class="output" type="copy">COPY</button>
-            <button class="input" type="submit">&#62;__&#60;</button>
-         </div>
-         <div class="expires" data-selected="1D">
-            <span>Expires</span>
-            <div class="expires__options">
-               <span data-value="10M">10 mins</span>
-               <span data-value="1H">1 hour</span>
-               <span data-value="1D">1 day</span>
-               <span data-value="1W">1 week</span>
-               <span data-value="2W">2 weeks</span>
-               <span data-value="1M">1 month</span>
-               <span data-value="6M">6 months</span>
-               <span data-value="1Y">1 year</span>
-               <span data-value="N">never</span>
-            </div>
-         </div>
-         <a class="anew" href="/">Shorten another link</a>
+         <span class="redirected">You are being redirected.<span> </span>.<span> </span>.</span>
+         <a class="anew e404" href="/">Go home</a>
       </form>
       <footer><a href="https://github.com/NaeemBolchhi/plynk">GitHub</a> | <a href="https://gitlab.com/NaeemBolchhi/plynk">GitLab</a> | <a href="https://mit-license.org/">MIT License</a></footer>
    </div>

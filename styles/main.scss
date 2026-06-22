@@ -272,10 +272,27 @@ body > .content {
             align-items: center;
             font-size: 1.2rem;
             text-transform: uppercase;
+            width: fit-content;
+            &.e404 {
+                opacity: 0;
+            }
+            &.right {
+                margin-left: auto;
+                margin-top: 2rem;
+                opacity: 1 !important;
+            }
+        }
+        .redirected {
+            font-size: 1.8rem;
+            text-align: right;
+            > span {
+                display: inline-block;
+                font-size: 0;
+            }
         }
     }
     &:not(.shortened) {
-        .output, .anew {
+        .output, .anew:not(.e404) {
             display: none;
         }
     }

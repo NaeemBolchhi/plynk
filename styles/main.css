@@ -272,8 +272,26 @@ body > .content > form .anew {
   align-items: center;
   font-size: 1.2rem;
   text-transform: uppercase;
+  width: -moz-fit-content;
+  width: fit-content;
 }
-body > .content:not(.shortened) .output, body > .content:not(.shortened) .anew {
+body > .content > form .anew.e404 {
+  opacity: 0;
+}
+body > .content > form .anew.right {
+  margin-left: auto;
+  margin-top: 2rem;
+  opacity: 1 !important;
+}
+body > .content > form .redirected {
+  font-size: 1.8rem;
+  text-align: right;
+}
+body > .content > form .redirected > span {
+  display: inline-block;
+  font-size: 0;
+}
+body > .content:not(.shortened) .output, body > .content:not(.shortened) .anew:not(.e404) {
   display: none;
 }
 body > .content.shortened .input, body > .content.shortened .expires {
