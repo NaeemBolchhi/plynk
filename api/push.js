@@ -12,6 +12,47 @@ function encrypt(text, password, salt) {
     return Buffer.concat([iv, tag, encrypted]).toString('base64');
 }
 
+function dateVer() {
+    const date = new Date();
+
+    return date.getFullYear().toString() +
+           date.getMonth().toString().padStart(2,0) +
+           date.getDate().toString().padStart(2,0) +
+           date.getHours().toString().padStart(2,0) +
+           date.getMinutes().toString().padStart(2,0) +
+           date.getSeconds().toString().padStart(2,0);
+}
+
+async function createPaste(dev_key, paste_content, expiration) {
+    const url = 'https://pastebin.com/api/api_post.php';
+
+    const params = new URLSearchParams();
+    params.append('api_option', 'paste');
+    params.append('api_paste_private', '1'); // Marked as unlisted
+    params.append('api_dev_key', dev_key);
+    params.append('api_paste_code', paste_content);
+
+    // Optional parameters
+    params.append('api_paste_name', dateVer());
+    params.append('api_paste_expire_date', expiration);
+    params.append('api_paste_format', 'text');
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: params
+        });
+
+        const data = await response.text();
+        return data;
+    } catch (error) {
+        console.error('Error creating paste:', error);
+    }
+}
+
 export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -25,7 +66,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed.' });
     }
 
-    const { PUSH_TOKENS, SALT_STRING } = process.env;
+    const { PUSH_TOKENS, SALT_STRING, PASS_STRING } = process.env;
 
     if (!PUSH_TOKENS || !SALT_STRING) {
         return res.status(500).json({ error: 'Server not configured.' });
@@ -35,7 +76,11 @@ export default async function handler(req, res) {
         const long_url = req.body.long_url;
         const user_key = req.body.user_key || SALT_STRING;
 
-        return res.status(200).json({ success: true, encrypted: encrypt(long_url, 'asd', user_key) });
+        const encrypted_url = encrypt(long_url, PASS_STRING, user_key);
+
+        createPaste(PUSH_TOKENS[0], long_url, '10M').then((res) => {
+            return res.status(200).json({ success: true, response: res });
+        });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error.' });
