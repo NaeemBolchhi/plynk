@@ -2,7 +2,7 @@
 
 Plynk shortens URLs by encrypting them and storing the ciphertext as a Pastebin paste. The paste ID becomes the short slug. No database required — Pastebin *is* the database.
 
-Live at: [plynk.vercel.app](https://plynk.vercel.app)
+[![Plynk on Vercel](https://img.shields.io/badge/WebApp-plynk.vercel.app-54c934?style=for-the-badge&logo=vercel)](https://plynk.vercel.app/)
 
 ---
 
