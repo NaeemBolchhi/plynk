@@ -82,7 +82,12 @@ export default async function handler(req, res) {
 
         const pasteResponse = await createPaste(PUSH_TOKENS_ARR[0], encrypted_url, '10M');
 
-        return res.status(200).json({ success: true, response: pasteResponse });
+        if (pasteResponse.match(/pastebin\.com/)) {
+            return res.status(200).json({ success: true, response: pasteResponse.replace(/.*\/(.*)$/,'$1') });
+        } else {
+            return res.status(200).json({ success: false, response: pasteResponse });
+        }
+
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Internal server error.' });
